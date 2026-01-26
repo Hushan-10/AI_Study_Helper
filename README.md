@@ -43,8 +43,10 @@ First, clone the repository:
 git clone https://github.com/Hushan-10/AI_Study_Helper.git
 cd AI_Study_Helper
 
-### 2. Create Virtual Environment
+```
 
+### 2. Create Virtual Environment
+```bash
 # Create a virtual environment
 python -m venv venv
 
@@ -54,6 +56,7 @@ source venv/bin/activate
 
 # On Windows:
 venv\Scripts\activate
+```
 
 ### 3. Install Jac-Lang and Dependencies
 
@@ -67,14 +70,6 @@ pip install jac-client
 # Install ByLLM for LLM integration
 pip install byllm
 
-
-## ▶️ How to Run
-
-1. **Install dependencies**
-
-```bash
-pip install jac-client
-pip install byllm
 ```
 ### 4. Export API Keys
 
@@ -92,7 +87,7 @@ jac start
 ### 6.Open your browser
 
 ```bash
-http://localhost:8000/page/app
+http://localhost:8000/
 ```
 
 ## 🧠 System Architecture
