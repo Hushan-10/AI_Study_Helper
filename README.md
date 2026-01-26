@@ -16,6 +16,58 @@ Instead of one big LLM responding to all queries, our system intelligently **cla
 
 The UI provides a dedicated **Study Workspace** and a **Homepage** with smooth navigation.
 
+## Project Structure
+
+```
+AI_Study_Helper/
+├── jac.toml              # Project configuration
+├── main.jac              # Main entry point (combines server + client)
+├── endpoints.sv.jac      # Server-side data models and walkers
+├── frontend.cl.jac       # Client-side React UI
+├── assets/               # Static assets (images, fonts, etc.)
+│   ├── home_page_img.jpg  
+└── components/           #components  
+```
+
+## Getting Started
+
+### Prerequisites
+- Python 3.10 or higher
+- Node.js 18+ and npm
+
+### 1. Clone the Jaseci Repository
+
+First, clone the repository:
+
+```bash
+git clone https://github.com/Hushan-10/AI_Study_Helper.git
+cd AI_Study_Helper
+
+### 2. Create Virtual Environment
+
+# Create a virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# On Linux/Mac:
+source venv/bin/activate
+
+# On Windows:
+venv\Scripts\activate
+
+### 3. Install Jac-Lang and Dependencies
+
+```bash
+# Install Jac-Lang
+pip install jaclang
+
+# Install Jac-Client for client-side functionality
+pip install jac-client
+
+# Install ByLLM for LLM integration
+pip install byllm
+
+
 ## ▶️ How to Run
 
 1. **Install dependencies**
@@ -24,20 +76,20 @@ The UI provides a dedicated **Study Workspace** and a **Homepage** with smooth n
 pip install jac-client
 pip install byllm
 ```
-2. **Export API Keys**
+### 4. Export API Keys
 
 ```bash
 export GEMINI_API_KEY = "your api key here"
 export TAVILY_API_KEY = "your api key here"
 ```
 
-3. **Run the application**
+### 5. Run the application
 
 ```bash
-jac serve app.jac
+jac start
 ```
 
-4. **Open your browser**
+### 6.Open your browser
 
 ```bash
 http://localhost:8000/page/app
