@@ -23,11 +23,11 @@ base_route_app = "app"
 [jacpack]
 name = "AI_Study_Helper"
 description = "My custom project template"
-jaclang = "0.9.10"
+jaclang = "0.9.11"
 
 [[jacpack.plugins]]
 name = "jac-client"
-version = "0.2.10"
+version = "0.2.11"
 
 [jacpack.options]
 directories = [".jac"]
