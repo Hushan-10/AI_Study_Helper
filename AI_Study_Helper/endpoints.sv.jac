@@ -3,7 +3,7 @@ import from byllm.lib { Model }
 import os;
 import time;
 
-glob llm = Model(model_name="gpt-4o-mini");
+glob llm = Model(model_name="gemini/gemini-2.5-flash");
 # glob tavily_client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"));
 
 def infer_quiz_count(text: str) -> int {
