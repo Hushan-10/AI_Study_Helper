@@ -31,7 +31,7 @@ node AppState {
 }
 
 def ensure_app_state() -> AppState {
-    st = [root -->(`?AppState)];
+    st = [root -->(?:AppState)];
     if st { return st[0]; }
 
     created = [root ++> AppState(created_at=str(time.time()))];
@@ -46,7 +46,7 @@ node student_level {
     can execute with levelwalker entry {
         print("[Student Level Node Activated]");
 
-        quizzes = [self -->(`?Quiz)];
+        quizzes = [self -->(?:Quiz)];
         self.full_score = 0;
         student_score = 0;
 
@@ -95,7 +95,7 @@ sem Quiz.correct_answer = "The correct option number as a string: '1', '2', '3',
 def ensure_student_level() -> student_level {
     app = ensure_app_state();
 
-    lvl = [app -->(`?student_level)];
+    lvl = [app -->(?:student_level)];
     if lvl { return lvl[0]; }
 
     created = [app ++> student_level(level="beginner")];
@@ -146,7 +146,7 @@ node QuizHandling {
 
         n = infer_quiz_count(visitor.utterance);
 
-        before = [self -->(`?Quiz)];
+        before = [self -->(?:Quiz)];
         before_len = len(before);
 
         full_prompt = f"""
@@ -171,7 +171,7 @@ node QuizHandling {
 
         _ = self.route_and_generate(full_prompt);
 
-        after = [self -->(`?Quiz)];
+        after = [self -->(?:Quiz)];
         new_quizzes = after[before_len:];
 
         quiz_text = "";
@@ -294,23 +294,23 @@ walker:pub task_manager {
 
     def plan_tasks(main_task: str) -> list[TaskPartition] by llm();
 
-    can start with `root entry {
+    can start with Root entry {
         _ = ensure_app_state();
         _ = ensure_student_level();
 
         # Ensure agent nodes exist under AppState (stable across requests)
         app = ensure_app_state();
 
-        quiz_nodes = [app -->(`?QuizHandling)];
+        quiz_nodes = [app -->(?:QuizHandling)];
         if not quiz_nodes { quiz_nodes = [app ++> QuizHandling()]; }
 
-        sum_nodes = [app -->(`?SummarizerHandling)];
+        sum_nodes = [app -->(?:SummarizerHandling)];
         if not sum_nodes { sum_nodes = [app ++> SummarizerHandling()]; }
 
-        flash_nodes = [app -->(`?FlashcardHandling)];
+        flash_nodes = [app -->(?:FlashcardHandling)];
         if not flash_nodes { flash_nodes = [app ++> FlashcardHandling()]; }
 
-        exp_nodes = [app -->(`?ExplanationHandling)];
+        exp_nodes = [app -->(?:ExplanationHandling)];
         if not exp_nodes { exp_nodes = [app ++> ExplanationHandling()]; }
 
         subtasks = self.plan_tasks(self.utterance);
@@ -347,10 +347,10 @@ walker:pub quiz_answer_walker {
         static has auth: bool = False;
     }
 
-    can start with `root entry {
+    can start with Root entry {
         lvl = ensure_student_level();
 
-        quizzes = [lvl -->(`?Quiz)];
+        quizzes = [lvl -->(?:Quiz)];
         if not quizzes {
             report {"ok": False, "message": "No quiz available. Generate a quiz first."};
             return;
@@ -390,7 +390,7 @@ walker:pub levelwalker {
         static has auth: bool = False;
     }
 
-    can start with `root entry {
+    can start with Root entry {
         lvl = ensure_student_level();
         visit lvl;
     }
